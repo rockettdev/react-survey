@@ -4,8 +4,12 @@ function Main() {
   const [open, setOpen] = useState(false); //Ignore this state
   const [rateDuck, setRateDuck] = useState ('')
   const [duckTime, setDuckTime] = useState ('')
+  const [duckThoughts, setDuckThoughts] = useState('')
+  const [userName, setUserName] = useState('')
+  const [userEmail, setUserEmail] = useState('')
+  const [formData, setFormData] = useState('')
 
-  console.log({rateDuck, duckTime})
+  console.log({rateDuck, duckTime, duckThoughts,userName,userEmail,})
 
 
 
@@ -17,6 +21,24 @@ function Main() {
     setDuckTime(e.target.value)
   }
 
+  const duckReview = (e) => {
+    setDuckThoughts(e.target.value)
+  }
+
+  const inputName = (e) => {
+    setUserName(e.target.value)
+  }
+
+
+  const inputEmail = (e) => {
+    setUserEmail(e.target.value)
+  }
+
+  const finalSubmit = (e) => {
+    e.preventDefault()
+    setFormData(rateDuck, duckTime, duckThoughts,userName,userEmail)
+  }
+  console.log(formData)
 
 
   return (
@@ -25,11 +47,6 @@ function Main() {
         <h2>Answers list</h2>
 
         {/* answers should go here */}
-
-
-
-
-
 
 
       </section>
@@ -42,22 +59,22 @@ function Main() {
         {/* <!-- Radio inputs go here --> */}
         <ul>
           <li>
-            <input id="color-one" type="radio" name="color" value="1" onClick={duckColourRating}/><label
+            <input id="color-one" type="radio" name="color" value="1" required onClick={duckColourRating}/><label
               for="color-one"
               >1</label>
           </li>
           <li>
-            <input id="color-two" type="radio" name="color" value="2" onClick={duckColourRating}/><label
+            <input id="color-two" type="radio" name="color" value="2" required onClick={duckColourRating}/><label
               for="color-two"
               >2</label>
           </li>
           <li>
-            <input id="color-three" type="radio" name="color" value="3" onClick={duckColourRating}/><label
+            <input id="color-three" type="radio" name="color" value="3" required onClick={duckColourRating}/><label
               for="color-three"
               >3</label>
           </li>
           <li>
-            <input id="color-four" type="radio" name="color" value="4"onClick={duckColourRating} /><label
+            <input id="color-four" type="radio" name="color" value="4" required onClick={duckColourRating} /><label
               for="color-four"
               >4</label>
           </li>
@@ -74,18 +91,19 @@ function Main() {
         {/* Checkboxes */}
         <ul>
         <li>
-          <label
+          <label required
             ><input
               name="spend-time"
               type="checkbox"
               value="swimming"
+              
               onChange={duckTimeSpent}
               checked={duckTime === 'swimming'} 
             />Swimming</label>
         </li>
         <li>
           <label
-            ><input name="spend-time" type="checkbox" value="bathing" onChange={duckTimeSpent} checked={duckTime === 'bathing'} 
+            ><input name="spend-time" type="checkbox" value="bathing"  onChange={duckTimeSpent} checked={duckTime === 'bathing'} 
             />Bathing</label>
         </li>
         <li>
@@ -94,20 +112,16 @@ function Main() {
               name="spend-time"
               type="checkbox"
               value="chatting"
+              
               onChange={duckTimeSpent}
               checked={duckTime === 'chatting'} 
             />Chatting</label>
         </li>
         <li>
-          <label><input name="spend-time" type="checkbox" value="noTime" onChange={duckTimeSpent} checked={duckTime === 'noTime'} 
+          <label><input name="spend-time" type="checkbox" value="noTime"  onChange={duckTimeSpent} checked={duckTime === 'noTime'} 
             />I don't like to spend time with it</label>
         </li>
       </ul>
-
-
-
-
-
 
 
 
@@ -116,17 +130,19 @@ function Main() {
           name="review"
           cols="30"
           rows="10"
+          onChange={duckReview}
         ></textarea></label
       ><label
         >Put your name here (if you feel like it):<input
           type="text"
           name="username"
-          value="" /></label
+          onChange={inputName}
+          /></label
       ><label>Leave us your email pretty please??<input
           type="email"
           name="email"
-          value="" /></label>
-          <input class="form__submit" type="submit" value="Submit Survey!" />
+          onChange={inputEmail} /></label>
+          <input class="form__submit" type="submit" value="Submit Survey!" onClick={finalSubmit}/>
     </form>
     
      
